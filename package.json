@@ -1,0 +1,29 @@
+{
+  "name": "hoopster-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "npx nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemanth506/Hoopster-backend.git"
+  },
+  "keywords": [
+    "Typescript"
+  ],
+  "author": "Hemanth Raaj G",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hemanth506/Hoopster-backend/issues"
+  },
+  "homepage": "https://github.com/hemanth506/Hoopster-backend#readme",
+  "devDependencies": {
+    "@types/node": "^20.6.5",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
