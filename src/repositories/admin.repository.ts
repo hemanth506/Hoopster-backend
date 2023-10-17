@@ -1,67 +1,59 @@
-import { connection } from "../config/default";
-import Admin from "../models/admin.model";
-import { OkPacket } from "mysql2";
-
-interface IAdminsRepository {
-  createAdmin(admin: Admin): Promise<number>;
-  retrieveAll(): Promise<Admin[]>;
-  retrieveByPhoneNumber(phoneNumber: number): Promise<Admin | undefined>;
-  deleteAdmin(phoneNumber: number): Promise<number>;
-}
+// import { connection } from "../config/default";
+import { Admin, IAdminsRepository } from "../interfaces/admin.interface";
+import {
+  createAdmin,
+  fetchAllAdmins,
+  fetchAdminByPhoneNumber,
+  deleteAdminByPhoneNumber,
+} from "../models/Admins/admins";
 
 class AdminRepository implements IAdminsRepository {
-  retrieveAll(): Promise<Admin[]> {
+  retrieveAllAdmins(): Promise<Admin[]> {
     return new Promise((resolve, reject) => {
-      const query = `Select * from ADMINS`;
-      connection.query(query, (err: Error, res: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          console.log("🚀Fetch all admins🚀", res);
-          resolve(res);
-        }
-      });
+      try {
+        const allAdmins: any = fetchAllAdmins();
+        console.log("🚀 Fetch all admins 🚀");
+        resolve(allAdmins);
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 
-  retrieveByPhoneNumber(phoneNumber: number): Promise<Admin | undefined> {
+  retrieveAdminByPhoneNumber(phoneNumber: number): Promise<Admin | undefined> {
     return new Promise((resolve, reject) => {
-      const query = `Select * FROM ADMINS WHERE phoneNumber=${phoneNumber}`;
-      connection.query(query, (err: Error, res: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          console.log("🚀Fetch data by phone number🚀");
-          resolve(res?.[0]);
-        }
-      });
+      try {
+        const admin: any = fetchAdminByPhoneNumber(phoneNumber);
+        console.log("🚀 Fetch admin by phone number🚀");
+        resolve(admin);
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 
   createAdmin(newAdmin: Admin): Promise<number> {
     return new Promise((resolve, reject) => {
-      const query = `INSERT INTO ADMINS (name, phoneNumber) VALUES ("${newAdmin.name}", ${newAdmin.phoneNumber})`;
-      connection.query(query, (err: Error, res: any) => {
-        if (err) reject(err);
-        else {
-          console.log("🚀New Admin Created🚀");
-          resolve(res);
-        }
-      });
+      try {
+        const createdAdmin: any = createAdmin(newAdmin);
+        console.log("🚀 New admin created 🚀", createdAdmin);
+        resolve(createdAdmin);
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 
-  deleteAdmin(phoneNumber: number): Promise<number> {
+  removeAdminByPhoneNumber(phoneNumber: number): Promise<number> {
     return new Promise((resolve, reject) => {
-      const query = `Delete from ADMINS where phoneNumber=${phoneNumber}`;
-      connection.query(query, (err: Error, res: any) => {
-        if(err) reject(err);
-        else {
-          console.log("🚀Admin deleted🚀");
-          resolve(res);
-        }
-      })
-    })
+      try {
+        const createdAdmin: any = deleteAdminByPhoneNumber(phoneNumber);
+        console.log("🚀 Admin deleted 🚀");
+        resolve(createdAdmin);
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 }
 
