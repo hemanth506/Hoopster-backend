@@ -1,4 +1,4 @@
-export interface Admin {
+export interface IAdmin {
   name: string;
   phoneNumber: number;
   password: string;
@@ -6,8 +6,8 @@ export interface Admin {
 }
 
 export interface IAdminsRepository {
-  createAdmin(admin: Admin): Promise<number>;
-  retrieveAllAdmins(): Promise<Admin[]>;
-  retrieveAdminByPhoneNumber(phoneNumber: number): Promise<Admin | undefined>;
+  createAdmin(admin: IAdmin): Promise<number>;
+  retrieveAllAdmins(): Promise<IAdmin[]>;
+  retrieveAdminByPhoneNumber(phoneNumber: number): Promise<IAdmin | undefined>;
   removeAdminByPhoneNumber(phoneNumber: number): Promise<number>;
 }

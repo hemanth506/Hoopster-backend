@@ -1,5 +1,5 @@
 // import { connection } from "../config/default";
-import { Admin, IAdminsRepository } from "../interfaces/admin.interface";
+import { IAdmin, IAdminsRepository } from "../interfaces/admin.interface";
 import {
   createAdmin,
   fetchAllAdmins,
@@ -8,7 +8,7 @@ import {
 } from "../models/Admins/admins";
 
 class AdminRepository implements IAdminsRepository {
-  retrieveAllAdmins(): Promise<Admin[]> {
+  retrieveAllAdmins(): Promise<IAdmin[]> {
     return new Promise((resolve, reject) => {
       try {
         const allAdmins: any = fetchAllAdmins();
@@ -20,7 +20,7 @@ class AdminRepository implements IAdminsRepository {
     });
   }
 
-  retrieveAdminByPhoneNumber(phoneNumber: number): Promise<Admin | undefined> {
+  retrieveAdminByPhoneNumber(phoneNumber: number): Promise<IAdmin | undefined> {
     return new Promise((resolve, reject) => {
       try {
         const admin: any = fetchAdminByPhoneNumber(phoneNumber);
@@ -32,7 +32,7 @@ class AdminRepository implements IAdminsRepository {
     });
   }
 
-  createAdmin(newAdmin: Admin): Promise<number> {
+  createAdmin(newAdmin: IAdmin): Promise<number> {
     return new Promise((resolve, reject) => {
       try {
         const createdAdmin: any = createAdmin(newAdmin);

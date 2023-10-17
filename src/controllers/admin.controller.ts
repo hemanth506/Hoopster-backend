@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { Admin } from "../interfaces/admin.interface";
+import { IAdmin } from "../interfaces/admin.interface";
 import adminRepository from "../repositories/admin.repository";
+import { HydratedDocument } from 'mongoose';
 
 export default class AdminController {
   async fetchAdmin(req: Request, res: Response) {
@@ -12,7 +13,7 @@ export default class AdminController {
       );
       let response = {};
       if (adminPhoneNumber) {
-        const data: Admin | undefined =
+        const data: IAdmin | undefined =
           await adminRepository.retrieveAdminByPhoneNumber(adminPhoneNumber);
         console.log("🉑 Admin fetched 🉑", data);
         if (data) {
@@ -26,7 +27,7 @@ export default class AdminController {
           res.status(404).send(response);
         }
       } else {
-        const data: Admin[] = await adminRepository.retrieveAllAdmins();
+        const data: IAdmin[] = await adminRepository.retrieveAllAdmins();
         console.log("🉑 All admins fetched 🉑", data);
         response = { result: "Successful", data };
         res.status(200).send(response);
@@ -53,13 +54,13 @@ export default class AdminController {
         };
         return res.status(400).send(response);
       }
-      const newAdmin: Admin = {
+      const newAdmin: IAdmin = {
         name,
         phoneNumber,
         email,
         password,
       };
-      const createdAdmin = await adminRepository.createAdmin(newAdmin);
+      const createdAdmin: any = await adminRepository.createAdmin(newAdmin);
       console.log("🉑 New admin created 🉑", createdAdmin);
       const response = { result: "Successful", data: createdAdmin };
       return res.status(201).send(response);

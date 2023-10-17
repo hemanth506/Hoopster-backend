@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import { IAdmin } from "../../interfaces/admin.interface";
 
-export const AdminSchema = new mongoose.Schema(
+export const AdminSchema = new Schema<IAdmin>(
   {
     name: { type: String, required: true },
     phoneNumber: { type: Number, required: true, unique: true },
@@ -12,4 +13,4 @@ export const AdminSchema = new mongoose.Schema(
   }
 );
 
-export const AdminModel = mongoose.model("Admin", AdminSchema);
+export const AdminModel = model<IAdmin>("Admin", AdminSchema);
