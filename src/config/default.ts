@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import compression from "compression";
 import { envVar } from "../env";
+import { Mongoose } from "mongoose";
 
 export class ExpressMiddleware {
   app: Application;
@@ -22,8 +23,8 @@ export class ExpressMiddleware {
 }
 
 export class DatabaseConnection {
-  mongoose: any;
-  constructor(mongoose: any) {
+  mongoose: Mongoose;
+  constructor(mongoose: Mongoose) {
     this.mongoose = mongoose;
     if (envVar.MONGODB_URI !== undefined) {
       console.log("🛩️  ~ MONGODB_URI:", envVar.MONGODB_URI);
