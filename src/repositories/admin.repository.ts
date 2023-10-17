@@ -34,7 +34,7 @@ class AdminRepository implements IAdminsRepository {
     });
   }
 
-  createAdmin(newAdmin: IAdmin): Promise<number> {
+  createAdmin(newAdmin: IAdmin): Promise<IAdmin> {
     return new Promise((resolve, reject) => {
       try {
         const createdAdmin: any = createAdmin(newAdmin);
@@ -46,7 +46,7 @@ class AdminRepository implements IAdminsRepository {
     });
   }
 
-  removeAdminByPhoneNumber(phoneNumber: number): Promise<number> {
+  removeAdminByPhoneNumber(phoneNumber: number): Promise<IAdmin> {
     return new Promise((resolve, reject) => {
       try {
         const createdAdmin: any = deleteAdminByPhoneNumber(phoneNumber);

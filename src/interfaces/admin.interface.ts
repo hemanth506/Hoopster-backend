@@ -6,8 +6,8 @@ export interface IAdmin {
 }
 
 export interface IAdminsRepository {
-  createAdmin(admin: IAdmin): Promise<number>;
+  createAdmin(admin: IAdmin): Promise<IAdmin>;
   retrieveAllAdmins(): Promise<IAdmin[]>;
   retrieveAdminByPhoneNumber(phoneNumber: number): Promise<IAdmin | undefined>;
-  removeAdminByPhoneNumber(phoneNumber: number): Promise<number>;
+  removeAdminByPhoneNumber(phoneNumber: number): Promise<IAdmin>;
 }
