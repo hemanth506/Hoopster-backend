@@ -7,7 +7,7 @@ import {
   deleteAdminByPhoneNumber,
 } from "../models/Admins/admins";
 
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument } from "mongoose";
 
 class AdminRepository implements IAdminsRepository {
   retrieveAllAdmins(): Promise<IAdmin[]> {

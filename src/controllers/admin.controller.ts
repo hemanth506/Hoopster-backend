@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IAdmin } from "../interfaces/admin.interface";
 import adminRepository from "../repositories/admin.repository";
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument } from "mongoose";
 
 export default class AdminController {
   async fetchAdmin(req: Request, res: Response) {
@@ -20,6 +20,7 @@ export default class AdminController {
           response = { result: "Successful", data };
           res.status(200).send(response);
         } else {
+          console.log(" ❌ Error while fetching Admin ❌");
           response = {
             result: "Unsuccessful",
             err: { message: "Admin not found" },
@@ -34,6 +35,7 @@ export default class AdminController {
       }
       return res;
     } catch (err) {
+      console.log(" ❌ Error while fetching Admins ❌");
       const response = { result: "Unsuccessful", err };
       return res.status(500).send(response);
     }
@@ -65,6 +67,7 @@ export default class AdminController {
       const response = { result: "Successful", data: createdAdmin };
       return res.status(201).send(response);
     } catch (err) {
+      console.log(" ❌ Error while creating new admin ❌");
       const response = { result: "Unsuccessful", err };
       return res.status(500).send(response);
     }
@@ -82,7 +85,9 @@ export default class AdminController {
         };
         return res.status(400).send(response);
       }
-      const deletedAdmin = await adminRepository.removeAdminByPhoneNumber(adminPhoneNumber);
+      const deletedAdmin = await adminRepository.removeAdminByPhoneNumber(
+        adminPhoneNumber
+      );
       if (deletedAdmin) {
         console.log("🉑 Admin deleted 🉑", deletedAdmin);
         res.status(201).send();
@@ -96,6 +101,7 @@ export default class AdminController {
       }
       return res;
     } catch (err) {
+      console.log(" ❌ Error while deleting Admin ❌");
       const response = { result: "Unsuccessful", err };
       return res.status(500).send(response);
     }
