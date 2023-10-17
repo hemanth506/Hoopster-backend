@@ -6,10 +6,9 @@ class AdminRoutes {
   controller = new AdminController();
 
   constructor() {
-    this.router.get("/", this.controller.fetchAllAdmins);
+    this.router.get("/", this.controller.fetchAdmin);
     this.router.post("/", this.controller.addNewAdmin);
     this.router.delete("/", this.controller.deleteAdmin);
-    this.router.get("/:phoneNumber", this.controller.fetchAdminByPhoneNumber);
   }
 }
 

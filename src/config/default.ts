@@ -2,8 +2,7 @@ import { Application, NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import compression from "compression";
-import mysql from "mysql2";
-import dbConfig from "./db.config";
+import { envVar } from "../env";
 
 export class ExpressMiddleware {
   app: Application;
@@ -18,24 +17,24 @@ export class ExpressMiddleware {
       res.header("Access-Control-Allow-Credentials", "true");
       next();
     });
-    console.log("🚀 ~ Fetched Express Middleware!");
+    console.log("👍 ~ Fetched Express Middleware!");
   }
 }
 
-export const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB,
-});
-
 export class DatabaseConnection {
-  connection: any;
-  constructor() {
-    this.connection = connection;
-    this.connection.connect(function (err: Error) {
-      if (err) throw err;
-      console.log("🚀 ~ Database Connected Successfully.");
-    });
+  mongoose: any;
+  constructor(mongoose: any) {
+    this.mongoose = mongoose;
+    if (envVar.MONGODB_URI !== undefined) {
+      console.log("🛩️  ~ MONGODB_URI:", envVar.MONGODB_URI);
+      this.mongoose.connect(envVar.MONGODB_URI);
+      this.mongoose.connection.on("error", (err: Error) => {
+        console.log("💢  ~ DatabaseConnection ~ error:", err);
+      });
+      console.log("❤️  ~ Database connected!");
+    } else {
+      console.log("💢  ~ MONGODB_URI not available:", envVar.MONGODB_URI);
+      throw new Error("Database connection error");
+    }
   }
 }
