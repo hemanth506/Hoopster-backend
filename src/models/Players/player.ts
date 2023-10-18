@@ -1,10 +1,13 @@
 import { PlayerModel } from "./player.model";
 import { IPlayer } from "../../interfaces/player.interface";
 
-export const createPlayer = (player: IPlayer) => PlayerModel.create(player);
-export const fetchPlayer = (phoneNumber: number) =>
+export const createPlayer = (playerData: IPlayer) => PlayerModel.create(playerData);
+export const fetchAllPlayers = () => PlayerModel.find();
+export const fetchPlayerByPhoneNumber = (phoneNumber: number) =>
   PlayerModel.findOne({ phoneNumber });
-export const updatePlayer = (phoneNumber: number, player: IPlayer) =>
-  PlayerModel.findOneAndUpdate({ phoneNumber }, player);
-export const deletePlayer = (phoneNumber: number) =>
+export const updatePlayerByPhoneNumber = (
+  phoneNumber: number,
+  playerData: IPlayer
+) => PlayerModel.findOneAndUpdate({ phoneNumber }, playerData);
+export const deletePlayerByPhoneNumber = (phoneNumber: number) =>
   PlayerModel.deleteOne({ phoneNumber });

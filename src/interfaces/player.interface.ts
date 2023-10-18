@@ -31,7 +31,8 @@ export interface IPlayer {
 
 export interface IPlayersRepository {
   createPlayer(playerData: IPlayer): Promise<IPlayer>;
-  fetchPlayerByPhoneNumber(phoneNumber: number): Promise<IPlayer | undefined>;
-  deletePlayerByPhoneNumber(phoneNumber: number): Promise<IPlayer | undefined>;
+  retrieveAllPlayers(): Promise<IPlayer[]>
+  retrievePlayerByPhoneNumber(phoneNumber: number): Promise<IPlayer | undefined>;
+  removePlayerByPhoneNumber(phoneNumber: number): Promise<IPlayer | undefined>;
   updatePlayerByPhoneNumber(phoneNumber: number, playerData: IPlayer): Promise<IPlayer | undefined>;
 }
