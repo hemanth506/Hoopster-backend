@@ -41,7 +41,7 @@ export default class AdminController {
     }
   }
 
-  async addNewAdmin(req: Request, res: Response) {
+  async createAdmin(req: Request, res: Response) {
     try {
       const name: string = req.body.name;
       const phoneNumber: number = req.body.phoneNumber;
@@ -75,7 +75,7 @@ export default class AdminController {
 
   async deleteAdmin(req: Request, res: Response) {
     try {
-      const adminPhoneNumber: number = Number(req.body.phoneNumber);
+      const adminPhoneNumber: number = Number(req.params.phoneNumber);
       if (!adminPhoneNumber) {
         const response = {
           result: "Unsuccessful",

@@ -7,8 +7,8 @@ class AdminRoutes {
 
   constructor() {
     this.router.get("/", this.controller.fetchAdmin);
-    this.router.post("/", this.controller.addNewAdmin);
-    this.router.delete("/", this.controller.deleteAdmin);
+    this.router.post("/", this.controller.createAdmin);
+    this.router.delete("/:phoneNumber", this.controller.deleteAdmin);
   }
 }
 
