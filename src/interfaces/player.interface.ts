@@ -4,12 +4,12 @@ export interface ITournament {
   tournamnentName: string;
 }
 
-export interface ITeam {
+export interface IPlayerTeam {
   teamId: string;
   teamName: string;
 }
 
-export interface ITournamentPlayed extends ITournament, ITeam {
+export interface ITournamentPlayed extends ITournament, IPlayerTeam {
   pointsScored?: number;
 }
 
