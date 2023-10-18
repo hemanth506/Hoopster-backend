@@ -27,7 +27,7 @@ const playerSchema: Schema = new Schema<IPlayer>(
     name: { type: String, required: true },
     phoneNumber: { type: Number, required: true, unique: true },
     tournamentsPlayed: { type: [tournamentPlayedSchema], required: true },
-    email: { type: String, unique: true },
+    email: { type: String },
     dateOfBirth: { type: String },
     imageURI: { type: String },
     favouritePlayer: { type: [String] },

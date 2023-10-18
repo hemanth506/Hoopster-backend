@@ -10,4 +10,4 @@ export const updatePlayerByPhoneNumber = (
   playerData: IPlayer
 ) => PlayerModel.findOneAndUpdate({ phoneNumber }, playerData);
 export const deletePlayerByPhoneNumber = (phoneNumber: number) =>
-  PlayerModel.deleteOne({ phoneNumber });
+  PlayerModel.findOneAndDelete({ phoneNumber });

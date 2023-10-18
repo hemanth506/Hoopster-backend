@@ -10,7 +10,7 @@ export interface ITeam {
 }
 
 export interface ITournamentPlayed extends ITournament, ITeam {
-  pointsScored: number;
+  pointsScored?: number;
 }
 
 export interface IPlayerAchievements extends ITournament {
